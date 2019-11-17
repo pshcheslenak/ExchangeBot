@@ -1,8 +1,5 @@
-#!/usr/bin/env python3
-
-
 import telebot
-from constants import token
+from config import token
 from datetime import datetime
 
 bot = telebot.TeleBot(token)
@@ -17,7 +14,11 @@ def log(message, answer):
                     message.text))
     print("Answer:" + answer)
 
-@bot.message_handler(content_types = ['text'])
+@bot.message_handler(commands = ['start', 'help'])
+def send_welcome(message):
+    bot.send_message(message.chat.id, "Hello:)")
+
+@bot.message_handler(content_types = ["text"])
 def handle_text(message):
     answer = "djgkfdhgkdhfkghfdk"
     if message.text == "a":
